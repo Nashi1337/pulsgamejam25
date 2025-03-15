@@ -28,6 +28,8 @@ namespace Player
 
         [ReadOnly] public ArmComponent armScript;
         [ReadOnly] public LegComponent legScript;
+        
+        public UIManager uiManager;
 
         private void Start()
         {
@@ -93,6 +95,7 @@ namespace Player
         {
             maxParts++;
             unequippedComponents++;
+            UpdateUILabels();
         }
 
         public void EquipArm()
@@ -106,6 +109,40 @@ namespace Player
                 unequippedComponents++;
                 currentArmIndex--;
             }
+
+            UpdateUILabels();
+        }
+
+        public void EquipLeg()
+        {
+            if (unequippedComponents > 0)
+            {
+                unequippedComponents--;
+                currentLegIndex++;
+            }else if (unequippedComponents == 0)
+            {
+                unequippedComponents++;
+                currentLegIndex--;
+            }
+            
+            UpdateUILabels();
+        }
+
+        public int GetArmIndex()
+        {
+            return currentArmIndex;
+        }
+
+        public int GetLegIndex()
+        {
+            return currentLegIndex;
+        }
+
+        void UpdateUILabels()
+        {
+            uiManager.UpdateArmLabel(currentArmIndex);
+            uiManager.UpdateLegLabel(currentLegIndex);
+            uiManager.UpdateUnusedLabel(unequippedComponents);
         }
     }
 }
