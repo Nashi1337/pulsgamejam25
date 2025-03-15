@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 5
   groundDampening: 3
-  jumpHeight: 5
+  jumpHeight: 2
