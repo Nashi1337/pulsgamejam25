@@ -36,15 +36,10 @@ namespace Player.Legs._0
 
         }
 
-        public void Jump(Rigidbody2D rb)
+        public void Jump(Rigidbody2D rb, bool isGrounded)
         {
-            //TODO: when grounded
-            rb.AddForce(new Vector2(0, _jumpHeight), ForceMode2D.Impulse);
-        }
-
-        public void GroundCheck(Rigidbody2D rb)
-        {
-            throw new System.NotImplementedException();
+            if(isGrounded)
+                rb.AddForce(new Vector2(0, _jumpHeight), ForceMode2D.Impulse);
         }
     }
 }

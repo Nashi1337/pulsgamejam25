@@ -10,8 +10,10 @@ public class CharacterController : MonoBehaviour
     public float gravity = -9.81f;
     private Vector3 _velocity;
     private BodyManager _bodyManager;
-
+    bool _isGrounded;
+    
     private Rigidbody2D _rb;
+    private BoxCollider2D _col;
 
     private void Start()
     {
@@ -19,19 +21,24 @@ public class CharacterController : MonoBehaviour
         _bodyManager = GetComponent<BodyManager>();
     }
 
+    private void Update()
+    {
+        GroundCheck();
+    }
+
     public void Jump()
     {
-        _bodyManager.currentLeg.GetComponent<LegComponent>().Jump(_rb);
+        _bodyManager.legScript.Jump(_rb, _isGrounded);
     }
 
     public void Move(Vector2 move)
     {
-        _bodyManager.currentLeg.GetComponent<LegComponent>().Move(move, _rb);
+        _bodyManager.legScript.Move(move, _rb);
     }
 
     public void GroundCheck()
     {
-        _bodyManager.currentLeg.GetComponent<LegComponent>().GroundCheck(_rb);
+        _isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1.2f, LayerMask.GetMask("Ground"));
     }
 
     // private void ApplyGravity()
