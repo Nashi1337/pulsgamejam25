@@ -28,19 +28,18 @@ public class CharacterController : MonoBehaviour
 
     public void Jump()
     {
-        _bodyManager.currentLeg.GetComponent<LegComponent>().Jump(_rb, _isGrounded);
+        _bodyManager.legScript.Jump(_rb, _isGrounded);
     }
 
     public void Move(Vector2 move)
     {
-        _bodyManager.currentLeg.GetComponent<LegComponent>().Move(move, _rb);
+        _bodyManager.legScript.Move(move, _rb);
     }
 
     public void GroundCheck()
     {
         _isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1.2f, LayerMask.GetMask("Ground"));
     }
-
 
     // private void ApplyGravity()
     // {
