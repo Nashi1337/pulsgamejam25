@@ -4,6 +4,7 @@ using Player.Arms;
 using Player.Legs;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class CharacterController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class CharacterController : MonoBehaviour
     
     private Rigidbody2D _rb;
     private BoxCollider2D _col;
+    
+    private GameObject interactableObject;
 
     private void Start()
     {
@@ -46,4 +49,66 @@ public class CharacterController : MonoBehaviour
     //     _velocity.y += gravity * Time.deltaTime;
     //     transform.position += _velocity * Time.deltaTime;
     // }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Death"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        
+        if (other.gameObject.CompareTag("Interactable"))
+        {
+            interactableObject = other.gameObject;
+        }
+
+        if (other.gameObject.CompareTag("SwingHook"))
+        {
+            interactableObject = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Interactable"))
+        {
+            interactableObject = null;
+        }
+
+        if (other.gameObject.CompareTag("SwingHook"))
+        {
+            interactableObject = null;
+        }
+    }
+
+    public void Interact()
+    {
+        if (interactableObject != null)
+        {
+            if (interactableObject.CompareTag("Interactable"))
+            {
+                _bodyManager.AddComponent();
+                DestroyImmediate(interactableObject);
+                interactableObject = null;
+            }
+            else if (interactableObject.CompareTag("SwingHook"))
+            {
+                GetComponent<PlayerMovement>().ToggleMovement();
+                _rb.linearVelocityX = 0;
+                GetComponent<PlayerSwing>().Swing(interactableObject.transform);
+            }
+        }
+    }
+
+    public void SwitchArm()
+    {
+        _bodyManager.EquipArm();
+    }
+
+    public void SwitchLeg()
+    {
+        //_bodyManager.EquipLeg();
+    }
+    
+    
 }

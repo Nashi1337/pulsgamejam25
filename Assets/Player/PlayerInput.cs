@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 _moveInput;
 
+    private bool disabled = false;
+
 
     private void Awake()
     {
@@ -17,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
         _playerInputActions.Player.Move.performed += ctx => _moveInput = ctx.ReadValue<Vector2>();
         _playerInputActions.Player.Move.canceled += ctx => _moveInput = Vector2.zero;
         _playerInputActions.Player.Jump.performed += ctx => Jump();
+        _playerInputActions.Player.Interact.started += ctx => Interact();
+        _playerInputActions.Player.SwitchLeg.started += ctx => SwitchLeg();
+        _playerInputActions.Player.SwitchArm.started += ctx => SwitchArm();
     }
 
     private void OnEnable()
@@ -31,7 +36,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        Move();
+        if(!disabled)
+            Move();
     }
 
     private void Move()
@@ -44,5 +50,25 @@ public class PlayerMovement : MonoBehaviour
     {
         _characterController.Jump();
     }
-    
+
+    private void Interact()
+    {
+        _characterController.Interact();
+    }
+
+    private void SwitchArm()
+    {
+        _characterController.SwitchArm();
+    }
+
+    private void SwitchLeg()
+    {
+        _characterController.SwitchLeg();
+    }
+
+    public void ToggleMovement()
+    {
+        disabled = !disabled;
+        Debug.Log("Movement now disabled? " + disabled);
+    }
 }

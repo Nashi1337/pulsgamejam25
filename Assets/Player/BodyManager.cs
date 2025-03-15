@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Player.Arms;
 using Player.Legs;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Player
         public GameObject[] legPrefabs;
 
         public int maxParts = 0;
+        private int unequippedComponents = 0;
 
         public Transform armTransform;
         public Transform legTransform;
@@ -85,6 +87,25 @@ namespace Player
             currentArm = Instantiate(armPrefabs[armIndex], armTransform);
             armScript = currentArm.GetComponent<ArmComponent>();
             return true;
+        }
+
+        public void AddComponent()
+        {
+            maxParts++;
+            unequippedComponents++;
+        }
+
+        public void EquipArm()
+        {
+            if (unequippedComponents > 0)
+            {
+                unequippedComponents--;
+                currentArmIndex++;
+            }else if (unequippedComponents == 0)
+            {
+                unequippedComponents++;
+                currentArmIndex--;
+            }
         }
     }
 }
