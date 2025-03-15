@@ -21,17 +21,17 @@ public class CharacterController : MonoBehaviour
 
     public void Jump()
     {
-        _bodyManager.currentLeg.GetComponent<LegComponent>().Jump(_rb);
+        _bodyManager.legScript.Jump(_rb);
     }
 
     public void Move(Vector2 move)
     {
-        _bodyManager.currentLeg.GetComponent<LegComponent>().Move(move, _rb);
+        _bodyManager.legScript.Move(move, _rb);
     }
 
     public void GroundCheck()
     {
-        _bodyManager.currentLeg.GetComponent<LegComponent>().GroundCheck(_rb);
+        _bodyManager.legScript.GroundCheck(_rb);
     }
 
     // private void ApplyGravity()

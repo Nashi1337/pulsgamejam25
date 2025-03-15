@@ -11,7 +11,7 @@ namespace Player
         public GameObject[] armPrefabs;
         public GameObject[] legPrefabs;
 
-        public int maxParts;
+        public int maxParts = 0;
 
         public Transform armTransform;
         public Transform legTransform;
@@ -29,22 +29,30 @@ namespace Player
 
         private void Start()
         {
-            currentArm = armPrefabs[currentArmIndex];
-            currentLeg = legPrefabs[currentLegIndex];
+            if (
+                TrySwitchToArm(currentArmIndex) &&
+                TrySwitchToLeg(currentLegIndex))
+            {
+                
+            }
+            else
+            {
+                throw new Exception("BodyManager: Init Failed");
+            }
         }
 
         public bool CanSwitchToLeg(int legIndex)
         {
-            if (legIndex < 0 || legIndex >= maxParts)
+            if (legIndex < 0 || legIndex > maxParts)
                 return false;
-            return legIndex + currentArmIndex <= maxParts;
+            return (legIndex + currentArmIndex) <= maxParts;
         }
 
         public bool CanSwitchToArm(int armIndex)
         {
-            if (armIndex < 0 || armIndex >= maxParts)
+            if (armIndex < 0 || armIndex > maxParts)
                 return false;
-            return armIndex + currentArmIndex <= maxParts;
+            return (armIndex + currentLegIndex) <= maxParts;
         }
 
         public bool TrySwitchToLeg(int legIndex)
@@ -53,9 +61,13 @@ namespace Player
             {
                 return false;
             }
+            
+            if(currentLeg != null)
+                Destroy(currentLeg);
 
             currentLegIndex = legIndex;
             currentLeg = Instantiate(legPrefabs[legIndex], legTransform);
+            legScript = currentLeg.GetComponent<LegComponent>();
             return true;
         }
 
@@ -65,9 +77,13 @@ namespace Player
             {
                 return false;
             }
+            
+            if (currentArm != null)
+                Destroy(currentArm);
 
             currentArmIndex = armIndex;
             currentArm = Instantiate(armPrefabs[armIndex], armTransform);
+            armScript = currentArm.GetComponent<ArmComponent>();
             return true;
         }
     }
