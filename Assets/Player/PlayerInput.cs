@@ -31,17 +31,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        GroundCheck();
         Move();
     }
 
     private void Move()
     {
         Vector3 moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y);
-        _characterController.Move(moveDirection * Time.deltaTime);
+        _characterController.Move(moveDirection);
     }
 
     private void Jump()
     {
         _characterController.Jump();
+    }
+    
+    private void GroundCheck()
+    {
+        //_characterController.GroundCheck();
     }
 }

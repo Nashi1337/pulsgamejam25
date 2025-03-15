@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Player.Arms;
 using Player.Legs;
@@ -17,14 +18,20 @@ namespace Player
 
         public int PartsRemaining => maxParts - currentArmIndex - currentLegIndex;
 
-        [ReadOnly] public int currentLegIndex;
-        [ReadOnly] public int currentArmIndex;
+        [ReadOnly] public int currentLegIndex = 0;
+        [ReadOnly] public int currentArmIndex = 0;
 
         [ReadOnly] public GameObject currentArm;
         [ReadOnly] public GameObject currentLeg;
 
         [ReadOnly] public ArmComponent armScript;
         [ReadOnly] public LegComponent legScript;
+
+        private void Start()
+        {
+            currentArm = armPrefabs[currentArmIndex];
+            currentLeg = legPrefabs[currentLegIndex];
+        }
 
         public bool CanSwitchToLeg(int legIndex)
         {
