@@ -274,6 +274,7 @@ MonoBehaviour:
   - {fileID: 5638113355793633672, guid: 0d3363746ae298e4992c1868219a0f9b, type: 3}
   legPrefabs:
   - {fileID: 1709054929928629728, guid: ec7df72b1cd16c946bca1d31a7323683, type: 3}
+  - {fileID: 4786681907770382921, guid: 5cb44d1a2233d3d4aa41924dbaf41e39, type: 3}
   maxParts: 0
   armTransform: {fileID: 0}
   legTransform: {fileID: 0}
