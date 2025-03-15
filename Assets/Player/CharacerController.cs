@@ -91,7 +91,7 @@ public class CharacterController : MonoBehaviour
                 DestroyImmediate(interactableObject);
                 interactableObject = null;
             }
-            else if (interactableObject.CompareTag("SwingHook"))
+            else if (interactableObject.CompareTag("SwingHook") && _bodyManager.GetArmIndex() > 0)
             {
                 GetComponent<PlayerMovement>().ToggleMovement();
                 _rb.linearVelocityX = 0;
