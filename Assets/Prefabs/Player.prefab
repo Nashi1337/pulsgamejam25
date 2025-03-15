@@ -133,6 +133,7 @@ MonoBehaviour:
   - {fileID: 5638113355793633672, guid: 490f076a5f5532a42afaf178424d1be2, type: 3}
   legPrefabs:
   - {fileID: 1709054929928629728, guid: ec7df72b1cd16c946bca1d31a7323683, type: 3}
+  - {fileID: 4786681907770382921, guid: 5cb44d1a2233d3d4aa41924dbaf41e39, type: 3}
   maxParts: 0
   armTransform: {fileID: 0}
   legTransform: {fileID: 0}
@@ -155,8 +156,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_GravityScale: 1
+  m_Material: {fileID: 6200000, guid: c0e3939f15075ea44bd7d40bb1b08e5e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -166,7 +167,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &8618210406147902584
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
