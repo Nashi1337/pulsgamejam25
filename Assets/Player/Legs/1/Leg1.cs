@@ -12,12 +12,7 @@ namespace Player.Legs._1
             throw new System.NotImplementedException();
         }
 
-        public void Jump(Rigidbody2D rb)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void GroundCheck(Rigidbody2D rb)
+        public void Jump(Rigidbody2D rb, bool isGrounded)
         {
             throw new System.NotImplementedException();
         }

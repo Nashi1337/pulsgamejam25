@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        GroundCheck();
         Move();
     }
 
@@ -46,8 +45,4 @@ public class PlayerMovement : MonoBehaviour
         _characterController.Jump();
     }
     
-    private void GroundCheck()
-    {
-        //_characterController.GroundCheck();
-    }
 }
