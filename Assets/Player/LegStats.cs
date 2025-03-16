@@ -7,6 +7,7 @@ namespace Player
     {
         public float maxSpeed;
         public float groundDampening;
+        public float acceleration;
         public float jumpHeight;
     }
 }

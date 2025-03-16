@@ -16,19 +16,22 @@ namespace Player.Legs
 
         if (direction.x == 0)
         {
-            rb.linearVelocityX = Mathf.Lerp(rb.linearVelocityX, targetVelocity, Time.deltaTime * Stats.groundDampening);
+            rb.linearVelocityX = Mathf.Lerp(rb.linearVelocityX, 0, Time.deltaTime * Stats.groundDampening);
 
-            if (Mathf.Abs(rb.linearVelocityX) < NotMovingDelta)
+            if (Mathf.Abs(rb.linearVelocityX) < LegComponent.NotMovingDelta)
             {
                 rb.linearVelocityX = 0;
             }
         }
         else
         {
-            rb.linearVelocityX = targetVelocity;
-        }
+            rb.linearVelocityX = Mathf.Lerp(rb.linearVelocityX, targetVelocity, Time.deltaTime * Stats.acceleration);
 
-        rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocity.y);
+            if (Mathf.Abs(rb.linearVelocityX) > Stats.maxSpeed)
+            {
+                rb.linearVelocityX = Stats.maxSpeed;
+            }
+        }
     }
 
         public void Jump(Rigidbody2D rb)

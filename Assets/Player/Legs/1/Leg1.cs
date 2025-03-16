@@ -28,7 +28,7 @@ namespace Player.Legs._1
 
             if (direction.x == 0)
             {
-                rb.linearVelocityX = Mathf.Lerp(rb.linearVelocityX, targetVelocity, Time.deltaTime * Stats.groundDampening);
+                rb.linearVelocityX = Mathf.Lerp(rb.linearVelocityX, 0, Time.deltaTime * Stats.groundDampening);
 
                 if (Mathf.Abs(rb.linearVelocityX) < LegComponent.NotMovingDelta)
                 {
@@ -37,10 +37,14 @@ namespace Player.Legs._1
             }
             else
             {
-                rb.linearVelocityX = targetVelocity;
+                rb.linearVelocityX = Mathf.Lerp(rb.linearVelocityX, targetVelocity, Time.deltaTime * Stats.acceleration);
+
+                if (Mathf.Abs(rb.linearVelocityX) > Stats.maxSpeed)
+                {
+                    rb.linearVelocityX = Stats.maxSpeed;
+                }
             }
 
-            rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocity.y);
 
             if(isGrounded )
             {

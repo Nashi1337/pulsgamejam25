@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4301650830770012360}
   - component: {fileID: 1698014200897229389}
   m_Layer: 0
-  m_Name: Leg2
+  m_Name: Leg3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79fc473538207d459969c3b78443e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 11400000, guid: 475f96b2dad8a5541be7d3486504dba2, type: 2}
+  _stats: {fileID: 11400000, guid: 8658f9ac1d4f27948b5acb6ff38cc682, type: 2}

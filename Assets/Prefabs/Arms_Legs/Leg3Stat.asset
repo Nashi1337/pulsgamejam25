@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6306c4a11bcf56542827f44650f030aa, type: 3}
-  m_Name: Leg2Stats
+  m_Name: Leg3Stat
   m_EditorClassIdentifier: 
-  maxSpeed: 7
-  groundDampening: 3
-  acceleration: 5
-  jumpHeight: 10
+  maxSpeed: 20
+  groundDampening: 0.5
+  acceleration: 1
+  jumpHeight: 8
