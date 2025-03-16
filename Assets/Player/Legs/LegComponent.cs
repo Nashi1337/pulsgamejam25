@@ -31,11 +31,11 @@ namespace Player.Legs
         rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocity.y);
     }
 
-    public void Jump(Rigidbody2D rb)
-    {
-        if (isGrounded)
-            rb.linearVelocityY = Stats.jumpHeight;
-    }
+        public void Jump(Rigidbody2D rb)
+        {
+            if (isGrounded)
+                rb.linearVelocityY = Stats.jumpHeight;
+        }
 
     }
 }

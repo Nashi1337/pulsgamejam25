@@ -2923,17 +2923,17 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5086937570736975926, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
-      propertyPath: legPrefabs.Array.data[0]
+      propertyPath: 'legPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1709054929928629728, guid: ec7df72b1cd16c946bca1d31a7323683, type: 3}
+    - target: {fileID: 5086937570736975926, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
+      propertyPath: 'legPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1709054929928629728, guid: 8e84794feab12de49a63ee87634626d0, type: 3}
+    - target: {fileID: 5086937570736975926, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
+      propertyPath: 'legPrefabs.Array.data[2]'
       value: 
       objectReference: {fileID: 4786681907770382921, guid: 5cb44d1a2233d3d4aa41924dbaf41e39, type: 3}
-    - target: {fileID: 5086937570736975926, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
-      propertyPath: legPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5086937570736975926, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
-      propertyPath: legPrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8618210406147902584, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
       propertyPath: m_Enabled
       value: 1

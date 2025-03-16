@@ -109,7 +109,7 @@ public class CharacterController : MonoBehaviour
 
     public void SwitchLeg()
     {
-        //_bodyManager.EquipLeg();
+        _bodyManager.EquipLeg();
     }
     
     

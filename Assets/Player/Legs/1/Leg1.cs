@@ -9,7 +9,6 @@ namespace Player.Legs._1
     {
         [SerializeField] private LegStats _stats;
         const float JumpWait = .1f; 
-        bool canJump = true;
         public LegStats Stats
         {
             get => _stats;
@@ -46,17 +45,9 @@ namespace Player.Legs._1
             if(isGrounded )
             {
                 rb.linearVelocityY = Stats.jumpHeight;
-                //StartCoroutine(JumpWithWait(rb));
             }
         }
 
-        IEnumerator JumpWithWait(Rigidbody2D rb)
-        {
-            rb.AddForce(new Vector2(0, Stats.jumpHeight), ForceMode2D.Impulse);
-            canJump = false;
-            yield return new WaitForSeconds(JumpWait);
-            canJump = true;
-        }
         public void Jump(Rigidbody2D rb)
         {
             return;
