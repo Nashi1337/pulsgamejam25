@@ -14,7 +14,7 @@ namespace Player
         public GameObject[] armPrefabs;
         public GameObject[] legPrefabs;
 
-        [SerializeField]private int unequippedComponents = 0;
+        [SerializeField]public int unequippedComponents = 0;
 
         public Transform armTransform;
         public Transform legTransform;
@@ -35,6 +35,11 @@ namespace Player
 
         private void Start()
         {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.LoadBodyManagerData(this);
+            }
+            
             pushableLayer = LayerMask.NameToLayer("Pushable");
             currentArm = Instantiate(armPrefabs[currentArmIndex], armTransform);
             armScript = currentArm.GetComponent<ArmComponent>();
