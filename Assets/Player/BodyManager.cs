@@ -66,10 +66,10 @@ namespace Player
 
         public bool TrySwitchToLeg(int legIndex)
         {
-            if (!CanSwitchToLeg(legIndex))
-            {
-                return false;
-            }
+            // if (!CanSwitchToLeg(legIndex))
+            // {
+            //     return false;
+            // }
             
             if(currentLeg != null)
                 Destroy(currentLeg);
@@ -82,10 +82,10 @@ namespace Player
 
         public bool TrySwitchToArm(int armIndex)
         {
-            if (!CanSwitchToArm(armIndex))
-            {
-                return false;
-            }
+            // if (!CanSwitchToArm(armIndex))
+            // {
+            //     return false;
+            // }
             
             if (currentArm != null)
                 Destroy(currentArm);
@@ -105,15 +105,16 @@ namespace Player
 
         public void EquipArm()
         {
-            if (unequippedComponents > 0)
-            {
-                unequippedComponents--;
-                currentArmIndex++;
-            }else if (unequippedComponents == 0)
-            {
-                unequippedComponents++;
-                currentArmIndex--;
-            }
+            TrySwitchToArm(++currentArmIndex % armPrefabs.Length);
+            // if (unequippedComponents > 0)
+            // {
+            //     unequippedComponents--;
+            //     currentArmIndex++;
+            // }else if (unequippedComponents == 0)
+            // {
+            //     unequippedComponents++;
+            //     currentArmIndex--;
+            // }
             
             UpdatePushCollision();
             UpdateUILabels();
@@ -133,15 +134,17 @@ namespace Player
 
         public void EquipLeg()
         {
-            if (unequippedComponents > 0)
-            {
-                unequippedComponents--;
-                currentLegIndex++;
-            }else if (unequippedComponents == 0)
-            {
-                unequippedComponents++;
-                currentLegIndex--;
-            }
+            TrySwitchToLeg(++currentLegIndex % legPrefabs.Length);
+
+            // if (unequippedComponents > 0)
+            // {
+            //     unequippedComponents--;
+            //     currentLegIndex++;
+            // }else if (unequippedComponents == 0)
+            // {
+            //     unequippedComponents++;
+            //     currentLegIndex--;
+            // }
             
             UpdateUILabels();
         }
