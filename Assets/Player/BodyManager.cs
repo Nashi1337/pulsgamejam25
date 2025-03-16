@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Player.Arms;
 using Player.Legs;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Player
         public GameObject[] legPrefabs;
 
         public int maxParts = 0;
+        private int unequippedComponents = 0;
 
         public Transform armTransform;
         public Transform legTransform;
@@ -26,6 +28,8 @@ namespace Player
 
         [ReadOnly] public ArmComponent armScript;
         [ReadOnly] public LegComponent legScript;
+        
+        public UIManager uiManager;
 
         private void Start()
         {
@@ -85,6 +89,60 @@ namespace Player
             currentArm = Instantiate(armPrefabs[armIndex], armTransform);
             armScript = currentArm.GetComponent<ArmComponent>();
             return true;
+        }
+
+        public void AddComponent()
+        {
+            maxParts++;
+            unequippedComponents++;
+            UpdateUILabels();
+        }
+
+        public void EquipArm()
+        {
+            if (unequippedComponents > 0)
+            {
+                unequippedComponents--;
+                currentArmIndex++;
+            }else if (unequippedComponents == 0)
+            {
+                unequippedComponents++;
+                currentArmIndex--;
+            }
+
+            UpdateUILabels();
+        }
+
+        public void EquipLeg()
+        {
+            if (unequippedComponents > 0)
+            {
+                unequippedComponents--;
+                currentLegIndex++;
+            }else if (unequippedComponents == 0)
+            {
+                unequippedComponents++;
+                currentLegIndex--;
+            }
+            
+            UpdateUILabels();
+        }
+
+        public int GetArmIndex()
+        {
+            return currentArmIndex;
+        }
+
+        public int GetLegIndex()
+        {
+            return currentLegIndex;
+        }
+
+        void UpdateUILabels()
+        {
+            uiManager.UpdateArmLabel(currentArmIndex);
+            uiManager.UpdateLegLabel(currentLegIndex);
+            uiManager.UpdateUnusedLabel(unequippedComponents);
         }
     }
 }
