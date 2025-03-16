@@ -1,6 +1,7 @@
 using System;
 using Player;
 using Player.Arms;
+using Player.Arms._3;
 using Player.Legs;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -94,6 +95,11 @@ public class CharacterController : MonoBehaviour
                 _rb.linearVelocityX = 0;
                 GetComponent<PlayerSwing>().Swing(interactableObject.transform);
             }
+
+        }
+        else if (_bodyManager.GetArmIndex() >= 3)
+        {
+            _bodyManager.armPrefabs[3].gameObject.GetComponent<Arm3>().Throw(transform);
         }
     }
 

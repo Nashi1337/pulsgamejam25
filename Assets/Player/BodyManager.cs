@@ -114,9 +114,8 @@ namespace Player
                 unequippedComponents++;
                 currentArmIndex--;
             }
-
-            UpdatePushCollision();
             
+            UpdatePushCollision();
             UpdateUILabels();
         }
 

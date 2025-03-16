@@ -8,6 +8,7 @@ TagManager:
   - SwingHook
   - Pushable
   - Collectable
+  - Target
   layers:
   - Default
   - TransparentFX
