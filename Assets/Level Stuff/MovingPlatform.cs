@@ -21,7 +21,7 @@ public class MovingPlatform : MonoBehaviour
 
         }
         stationIndex = 0;
-        playerParent = GameObject.FindGameObjectWithTag("Level").transform;
+        
     }
 
   
@@ -43,7 +43,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Player2"))
+        if (collision.gameObject.CompareTag("Player") )
         {
 
             collision.transform.SetParent(this.transform);
@@ -52,7 +52,7 @@ public class MovingPlatform : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Player2"))
+        if (collision.gameObject.CompareTag("Player") )
         {
             collision.transform.SetParent(playerParent);
 
