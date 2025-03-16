@@ -1,39 +1,41 @@
 
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Player.Legs
 {
-    public interface LegComponent
+    public interface LegComponent 
     {
-        const double NotMovingDelta = 10e-3;
-        LegStats Stats { get; set; }
-        
-        public void Move(Vector2 direction, Rigidbody2D rb)
+    const double NotMovingDelta = 10e-3;
+    LegStats Stats { get; set; }
+    bool isGrounded { get; set; }
+
+    public void Move(Vector2 direction, Rigidbody2D rb)
+    {
+        float targetVelocity = direction.x * Stats.maxSpeed;
+
+        if (direction.x == 0)
         {
-            float targetVelocity = direction.x * Stats.maxSpeed;
+            rb.linearVelocityX = Mathf.Lerp(rb.linearVelocityX, targetVelocity, Time.deltaTime * Stats.groundDampening);
 
-            if (direction.x == 0)
+            if (Mathf.Abs(rb.linearVelocityX) < NotMovingDelta)
             {
-                rb.linearVelocityX = Mathf.Lerp(rb.linearVelocityX, targetVelocity, Time.deltaTime * Stats.groundDampening);
-
-                if (Mathf.Abs(rb.linearVelocityX) < NotMovingDelta)
-                {
-                    rb.linearVelocityX = 0;
-                }
+                rb.linearVelocityX = 0;
             }
-            else
-            {
-                rb.linearVelocityX = targetVelocity;
-            }
-
-            rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocity.y);
+        }
+        else
+        {
+            rb.linearVelocityX = targetVelocity;
         }
 
-        public void Jump(Rigidbody2D rb, bool isGrounded)
-        {
-            if(isGrounded)
-                rb.AddForce(new Vector2(0, Stats.jumpHeight), ForceMode2D.Impulse);
-        }
-        
+        rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocity.y);
+    }
+
+    public void Jump(Rigidbody2D rb)
+    {
+        if (isGrounded)
+            rb.linearVelocityY = Stats.jumpHeight;
+    }
+
     }
 }

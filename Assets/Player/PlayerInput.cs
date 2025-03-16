@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
         _playerInputActions.Player.Move.performed += ctx => _moveInput = ctx.ReadValue<Vector2>();
         _playerInputActions.Player.Move.canceled += ctx => _moveInput = Vector2.zero;
-        _playerInputActions.Player.Jump.performed += ctx => Jump();
+        _playerInputActions.Player.Jump.started += ctx => Jump();
     }
 
     private void OnEnable()

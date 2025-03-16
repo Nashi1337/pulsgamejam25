@@ -640,11 +640,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6200000, guid: c0e3939f15075ea44bd7d40bb1b08e5e, type: 2}
     - target: {fileID: 3026773081197676637, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3026773081197676637, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3026773081197676637, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
       propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3026773081197676637, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
+      propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3569928296386462300, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
@@ -686,6 +694,26 @@ PrefabInstance:
     - target: {fileID: 3569928296386462300, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086937570736975926, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
+      propertyPath: legPrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086937570736975926, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
+      propertyPath: 'legPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4786681907770382921, guid: 5cb44d1a2233d3d4aa41924dbaf41e39, type: 3}
+    - target: {fileID: 5086937570736975926, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
+      propertyPath: 'legPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086937570736975926, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
+      propertyPath: 'legPrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8618210406147902584, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9170625543629413553, guid: 195a672a58f23ef4fa62a27e61b5524f, type: 3}
       propertyPath: m_Name

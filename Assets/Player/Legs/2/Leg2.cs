@@ -1,14 +1,13 @@
-﻿using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Player.Legs._0
+namespace Player.Legs._2
 {
-    public class Leg0 :   MonoBehaviour, LegComponent
+    public class Leg2: MonoBehaviour, LegComponent
     {
         [SerializeField] private LegStats _stats;
         public bool isGrounded { get; set; }
 
+        
         public LegStats Stats
         {
             get => _stats;
