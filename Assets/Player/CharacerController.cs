@@ -28,6 +28,10 @@ public class CharacterController : MonoBehaviour
     {
         GroundCheck();
         //ApplyGravity();
+        if (_bodyManager.GetArmIndex() >= 2)
+        {
+            
+        }
     }
 
     public void Jump()
