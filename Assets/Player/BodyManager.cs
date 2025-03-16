@@ -32,6 +32,9 @@ namespace Player
 
         public UIManager uiManager;
         private LayerMask pushableLayer;
+        
+        // Animator
+        public event Action<int,int> LimbsChanged;
 
         private void Start()
         {
@@ -55,6 +58,7 @@ namespace Player
 
             UpdatePushCollision();
             UpdateUILabels();
+           
 
         }
 
@@ -119,6 +123,7 @@ namespace Player
 
             UpdatePushCollision();
             UpdateUILabels();
+            LimbsChanged?.Invoke(currentLegIndex, currentArmIndex);
         }
 
         private void UpdatePushCollision()
@@ -148,6 +153,8 @@ namespace Player
             }
 
             UpdateUILabels();
+            LimbsChanged?.Invoke(currentLegIndex, currentArmIndex);
+           
         }
 
         public int GetArmIndex()
