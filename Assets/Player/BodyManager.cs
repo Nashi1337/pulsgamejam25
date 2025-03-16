@@ -42,6 +42,11 @@ namespace Player
             {
                 GameManager.Instance.LoadBodyManagerData(this);
             }
+
+            if (uiManager == null)
+            {
+                uiManager = FindFirstObjectByType<UIManager>();
+            }
             
             pushableLayer = LayerMask.NameToLayer("Pushable");
             currentArm = Instantiate(armPrefabs[currentArmIndex], armTransform);
