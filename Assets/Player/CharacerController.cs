@@ -70,6 +70,16 @@ public class CharacterController : MonoBehaviour
         {
             interactableObject = other.gameObject;
         }
+
+        if (other.gameObject.CompareTag("TransitionZone"))
+        {
+            if (_bodyManager != null && GameManager.Instance != null)
+            {
+                GameManager.Instance.SaveBodyManagerData(_bodyManager);
+            }
+            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex+1;
+            SceneManager.LoadScene(nextSceneIndex);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)

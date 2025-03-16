@@ -4,6 +4,7 @@ using System.Linq;
 using Player.Arms;
 using Player.Arms._2;
 using Player.Legs;
+using Sound;
 using UnityEngine;
 
 namespace Player
@@ -13,7 +14,7 @@ namespace Player
         public GameObject[] armPrefabs;
         public GameObject[] legPrefabs;
 
-        [SerializeField]private int unequippedComponents = 0;
+        [SerializeField]public int unequippedComponents = 0;
 
         public Transform armTransform;
         public Transform legTransform;
@@ -26,6 +27,8 @@ namespace Player
 
         [ReadOnly] public ArmComponent armScript;
         [ReadOnly] public LegComponent legScript;
+        
+        public AudioSource audioSource;
 
         public UIManager uiManager;
         private LayerMask pushableLayer;
@@ -35,11 +38,18 @@ namespace Player
 
         private void Start()
         {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.LoadBodyManagerData(this);
+            }
+            
             pushableLayer = LayerMask.NameToLayer("Pushable");
             currentArm = Instantiate(armPrefabs[currentArmIndex], armTransform);
             armScript = currentArm.GetComponent<ArmComponent>();
             currentLeg = Instantiate(legPrefabs[currentLegIndex], legTransform);
             legScript = currentLeg.GetComponent<LegComponent>();
+            
+            audioSource = GetComponent<AudioSource>();
 
             UpdatePushCollision();
             UpdateUILabels();
@@ -94,6 +104,9 @@ namespace Player
 
         public void EquipArm()
         {
+            SoundPitcher.PitchRandom(audioSource,0.9f,1.1f);
+            audioSource.Play();
+            
             if (!TrySwitchToArm(currentArmIndex+1 % armPrefabs.Length))
             {
                 var res = TrySwitchToArm(0);
@@ -122,6 +135,9 @@ namespace Player
 
         public void EquipLeg()
         {
+            SoundPitcher.PitchRandom(audioSource,0.9f,1.1f);
+            audioSource.Play();
+            
             if (!TrySwitchToLeg(currentLegIndex+1 % legPrefabs.Length))
             {
                 var res = TrySwitchToLeg(0);
