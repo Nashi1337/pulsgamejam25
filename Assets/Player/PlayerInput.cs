@@ -69,6 +69,5 @@ public class PlayerMovement : MonoBehaviour
     public void ToggleMovement()
     {
         disabled = !disabled;
-        Debug.Log("Movement now disabled? " + disabled);
     }
 }

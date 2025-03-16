@@ -59,9 +59,10 @@ public class CharacterController : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         
-        if (other.gameObject.CompareTag("Interactable"))
+        if (other.gameObject.CompareTag("Collectable"))
         {
-            interactableObject = other.gameObject;
+            _bodyManager.AddComponent();
+            Destroy(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("SwingHook"))
@@ -87,13 +88,7 @@ public class CharacterController : MonoBehaviour
     {
         if (interactableObject != null)
         {
-            if (interactableObject.CompareTag("Interactable"))
-            {
-                _bodyManager.AddComponent();
-                DestroyImmediate(interactableObject);
-                interactableObject = null;
-            }
-            else if (interactableObject.CompareTag("SwingHook") && _bodyManager.GetArmIndex() > 0)
+            if (interactableObject.CompareTag("SwingHook") && _bodyManager.GetArmIndex() > 0)
             {
                 GetComponent<PlayerMovement>().ToggleMovement();
                 _rb.linearVelocityX = 0;

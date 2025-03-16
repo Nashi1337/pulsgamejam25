@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Player.Arms;
+using Player.Arms._2;
 using Player.Legs;
 using UnityEngine;
 
@@ -30,9 +31,11 @@ namespace Player
         [ReadOnly] public LegComponent legScript;
         
         public UIManager uiManager;
+        private LayerMask pushableLayer;
 
         private void Start()
         {
+            pushableLayer = LayerMask.NameToLayer("Pushable");
             if (
                 TrySwitchToArm(currentArmIndex) &&
                 TrySwitchToLeg(currentLegIndex))
@@ -43,6 +46,8 @@ namespace Player
             {
                 throw new Exception("BodyManager: Init Failed");
             }
+            
+            UpdatePushCollision();
         }
 
         public bool CanSwitchToLeg(int legIndex)
@@ -110,7 +115,21 @@ namespace Player
                 currentArmIndex--;
             }
 
+            UpdatePushCollision();
+            
             UpdateUILabels();
+        }
+
+        private void UpdatePushCollision()
+        {
+            if (currentArmIndex >= 2)
+            {
+                gameObject.GetComponent<CapsuleCollider2D>().excludeLayers &= ~(1<<pushableLayer);
+            }
+            else
+            {
+                gameObject.GetComponent<CapsuleCollider2D>().excludeLayers |= (1<<pushableLayer);
+            }
         }
 
         public void EquipLeg()
