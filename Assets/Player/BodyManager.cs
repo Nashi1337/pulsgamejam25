@@ -13,13 +13,10 @@ namespace Player
         public GameObject[] armPrefabs;
         public GameObject[] legPrefabs;
 
-        public int maxParts = 0;
-        private int unequippedComponents = 0;
+        [SerializeField]private int unequippedComponents = 0;
 
         public Transform armTransform;
         public Transform legTransform;
-
-        public int PartsRemaining => maxParts - currentArmIndex - currentLegIndex;
 
         [ReadOnly] public int currentLegIndex = 0;
         [ReadOnly] public int currentArmIndex = 0;
@@ -29,52 +26,38 @@ namespace Player
 
         [ReadOnly] public ArmComponent armScript;
         [ReadOnly] public LegComponent legScript;
-        
+
         public UIManager uiManager;
         private LayerMask pushableLayer;
 
         private void Start()
         {
             pushableLayer = LayerMask.NameToLayer("Pushable");
-            if (
-                TrySwitchToArm(currentArmIndex) &&
-                TrySwitchToLeg(currentLegIndex))
-            {
-                
-            }
-            else
-            {
-                throw new Exception("BodyManager: Init Failed");
-            }
-            
+            currentArm = Instantiate(armPrefabs[currentArmIndex], armTransform);
+            armScript = currentArm.GetComponent<ArmComponent>();
+            currentLeg = Instantiate(legPrefabs[currentLegIndex], legTransform);
+            legScript = currentLeg.GetComponent<LegComponent>();
+
             UpdatePushCollision();
-        }
+            UpdateUILabels();
 
-        public bool CanSwitchToLeg(int legIndex)
-        {
-            if (legIndex < 0 || legIndex > maxParts)
-                return false;
-            return (legIndex + currentArmIndex) <= maxParts;
-        }
-
-        public bool CanSwitchToArm(int armIndex)
-        {
-            if (armIndex < 0 || armIndex > maxParts)
-                return false;
-            return (armIndex + currentLegIndex) <= maxParts;
         }
 
         public bool TrySwitchToLeg(int legIndex)
         {
-            // if (!CanSwitchToLeg(legIndex))
-            // {
-            //     return false;
-            // }
-            
-            if(currentLeg != null)
+            var available = unequippedComponents + currentLegIndex;
+
+            if ((legIndex < 0 || legIndex > available))
+            {
+                return false;
+            }
+
+            if (currentLeg != null)
                 Destroy(currentLeg);
+            unequippedComponents = unequippedComponents + currentLegIndex -legIndex;
 
             currentLegIndex = legIndex;
+
             currentLeg = Instantiate(legPrefabs[legIndex], legTransform);
             legScript = currentLeg.GetComponent<LegComponent>();
             return true;
@@ -82,13 +65,16 @@ namespace Player
 
         public bool TrySwitchToArm(int armIndex)
         {
-            // if (!CanSwitchToArm(armIndex))
-            // {
-            //     return false;
-            // }
-            
+            var available = unequippedComponents + currentArmIndex;
+
+            if ((armIndex < 0 || armIndex > available))
+            {
+                return false;
+            }
+
             if (currentArm != null)
                 Destroy(currentArm);
+            unequippedComponents = unequippedComponents + currentArmIndex - armIndex;
 
             currentArmIndex = armIndex;
             currentArm = Instantiate(armPrefabs[armIndex], armTransform);
@@ -98,24 +84,21 @@ namespace Player
 
         public void AddComponent()
         {
-            maxParts++;
             unequippedComponents++;
             UpdateUILabels();
         }
 
         public void EquipArm()
         {
-            TrySwitchToArm(++currentArmIndex % armPrefabs.Length);
-            // if (unequippedComponents > 0)
-            // {
-            //     unequippedComponents--;
-            //     currentArmIndex++;
-            // }else if (unequippedComponents == 0)
-            // {
-            //     unequippedComponents++;
-            //     currentArmIndex--;
-            // }
-            
+            if (!TrySwitchToArm(currentArmIndex+1 % armPrefabs.Length))
+            {
+                var res = TrySwitchToArm(0);
+                if (!res)
+                {
+                    throw new Exception("BodyManager: Switch Failed");
+                }
+            }
+
             UpdatePushCollision();
             UpdateUILabels();
         }
@@ -124,28 +107,25 @@ namespace Player
         {
             if (currentArmIndex >= 2)
             {
-                gameObject.GetComponent<CapsuleCollider2D>().excludeLayers &= ~(1<<pushableLayer);
+                gameObject.GetComponent<CapsuleCollider2D>().excludeLayers &= ~(1 << pushableLayer);
             }
             else
             {
-                gameObject.GetComponent<CapsuleCollider2D>().excludeLayers |= (1<<pushableLayer);
+                gameObject.GetComponent<CapsuleCollider2D>().excludeLayers |= (1 << pushableLayer);
             }
         }
 
         public void EquipLeg()
         {
-            TrySwitchToLeg(++currentLegIndex % legPrefabs.Length);
+            if (!TrySwitchToLeg(currentLegIndex+1 % legPrefabs.Length))
+            {
+                var res = TrySwitchToLeg(0);
+                if (!res)
+                {
+                    throw new Exception("BodyManager: Switch Failed");
+                }
+            }
 
-            // if (unequippedComponents > 0)
-            // {
-            //     unequippedComponents--;
-            //     currentLegIndex++;
-            // }else if (unequippedComponents == 0)
-            // {
-            //     unequippedComponents++;
-            //     currentLegIndex--;
-            // }
-            
             UpdateUILabels();
         }
 
